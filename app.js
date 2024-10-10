@@ -1,6 +1,6 @@
 import express from "express";
 import cors from 'cors';
-// import userrouter from "./Routes/userrouter.js";
+import userrouter from "./Routes/userrouter.js";
 import morgan from 'morgan'
 import cookieParser from "cookie-parser";
 
@@ -14,8 +14,16 @@ app.use(express.json())
 app.use(morgan("dev"))  
 
 app.use(cookieParser())
-
-// app.use('/api/', userrouter)
+const home = (req, res)=>{
+    try {
+        
+        res.status(200).json({message:"Hello this is the homepage"})
+    } catch (error) {
+        res.status(500).json({message: error.response.data.message})
+    }
+} 
+app.get('/', home)
+app.use('/api', userrouter)
 
 
 export default app;
