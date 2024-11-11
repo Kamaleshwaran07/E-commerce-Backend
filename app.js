@@ -3,11 +3,16 @@ import cors from 'cors';
 import userrouter from "./Routes/userrouter.js";
 import morgan from 'morgan'
 import cookieParser from "cookie-parser";
+import dotenv from 'dotenv';
 
 const app = express()
 
+dotenv.config()
 
-app.use(cors());
+app.use(cors({
+    origin: ['http://localhost:5173'],
+    credentials:true
+}));
 
 app.use(express.json())
 
