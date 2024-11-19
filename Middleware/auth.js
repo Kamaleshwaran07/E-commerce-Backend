@@ -16,11 +16,11 @@ const authToken ={
         const decoded = jwt.verify(token, process.env.JWT_secret)
         req.userId = decoded.id
         console.log("userId",req.userId)
-        const findUser = await User.findById(decoded.id)
-            if(!findUser){
-                return res.status(404).json({message:"User not found"})
-            }
-            res.status(200).json({message:"User found", findUser})
+        // const findUser = await User.findById(decoded.id)
+        //     if(!findUser){
+        //         return res.status(404).json({message:"User not found"})
+        //     }
+        //     res.status(200).json({message:"User found", findUser})
        next() 
     } catch (error) {
         res.status(401).json({message:"Invalid Token"})
