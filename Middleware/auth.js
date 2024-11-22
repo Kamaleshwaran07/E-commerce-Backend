@@ -9,7 +9,7 @@ const authToken ={
     const token = req.cookies.token
     console.log("Token from auth", token);
     if (!token) {
-        res.status(400).json({message:"Token is missing"})
+        return res.status(400).json({message:"Token is missing"})
 
     }
     try {
