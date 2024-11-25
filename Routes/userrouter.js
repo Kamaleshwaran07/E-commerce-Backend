@@ -7,6 +7,9 @@ const userRouter = express.Router()
 userRouter.post('/signup', userController.signup)
 userRouter.post('/login', userController.login)
 userRouter.get('/logout', userController.logout)
+userRouter.post('edit-role', authToken.verifyToken, userController.editRoleDetails)
+userRouter.post('/edit-profile', authToken.verifyToken, userController.editUserDetails)
+userRouter.get('/getallusers',authToken.verifyToken, userController.getAllUsers)
 userRouter.get('/getuser', authToken.verifyToken, userController.getUserDetails)
 
 
