@@ -7,7 +7,7 @@ const authToken ={
  verifyToken: async (req, res, next)=> {
  try {
     const token = req.cookies.token
-    console.log("Token from auth", token);
+    // console.log("Token from auth", token);
     if (!token) {
         return res.status(400).json({message:"Token is missing"})
 
@@ -15,7 +15,7 @@ const authToken ={
     try {
         const decoded = jwt.verify(token, process.env.JWT_secret)
         req.userId = decoded.id
-        console.log("userId",req.userId)
+        // console.log("userId",req.userId)
         // const findUser = await User.findById(decoded.id)
         //     if(!findUser){
         //         return res.status(404).json({message:"User not found"})
