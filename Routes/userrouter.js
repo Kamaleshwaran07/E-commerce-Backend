@@ -17,9 +17,9 @@ userRouter.get('/getuser', authToken.verifyToken, userController.getUserDetails)
 
 // Product Router
 
-userRouter.post('create-product', authToken.verifyToken, productController.createProduct )
-userRouter.get('/getallproducts', authToken.verifyToken, productController.getAllProducts)
-userRouter.post('edit-price/:productId', authToken.verifyToken, productController.editProductPrice)
+userRouter.post('/create-product', authToken.verifyToken, productController.createProduct )
+userRouter.get('/getallproducts', productController.getAllProducts)
+userRouter.post('edit-product/:productId', authToken.verifyToken, productController.editProductPrice)
 userRouter.delete('/delete-product/:productId', authToken.verifyToken, productController.deleteProduct)
 
 
