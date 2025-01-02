@@ -21,6 +21,8 @@ userRouter.post('/create-product', authToken.verifyToken, productController.crea
 userRouter.get('/getallproducts', productController.getAllProducts)
 userRouter.post('/edit-product/:productId', authToken.verifyToken, productController.editProductPrice)
 userRouter.delete('/delete-product/:productId', authToken.verifyToken, productController.deleteProduct)
+userRouter.get('/getAllCategories', productController.productCategory)
+userRouter.get('/category/:category', productController.getCategoryWiseProducts)
 
 
 export default userRouter
