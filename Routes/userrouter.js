@@ -23,6 +23,8 @@ userRouter.post('/edit-product/:productId', authToken.verifyToken, productContro
 userRouter.delete('/delete-product/:productId', authToken.verifyToken, productController.deleteProduct)
 userRouter.get('/getAllCategories', productController.productCategory)
 userRouter.get('/category/:category', productController.getCategoryWiseProducts)
+userRouter.get('/subCategory/:subCategory', productController.getSubCategoryWiseProducts)
+userRouter.get('/:category/:subCategory', productController.getSubcategoryProductsFromCategory)
 
 
 export default userRouter
