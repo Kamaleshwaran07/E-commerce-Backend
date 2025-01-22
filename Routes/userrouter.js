@@ -24,6 +24,7 @@ userRouter.delete('/delete-product/:productId', authToken.verifyToken, productCo
 userRouter.get('/getAllCategories', productController.productCategory)
 userRouter.get('/category/:category', productController.getCategoryWiseProducts)
 userRouter.get('/subCategory/:subCategory', productController.getSubCategoryWiseProducts)
+userRouter.get('/homeBanner/:subCategory', productController.getSubCategoryWiseProductsForBanner)
 userRouter.get('/:category/:subCategory', productController.getSubcategoryProductsFromCategory)
 
 
