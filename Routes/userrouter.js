@@ -26,6 +26,7 @@ userRouter.get('/category/:category', productController.getCategoryWiseProducts)
 userRouter.get('/subCategory/:subCategory', productController.getSubCategoryWiseProducts)
 userRouter.get('/homeBanner/:subCategory', productController.getSubCategoryWiseProductsForBanner)
 userRouter.get('/:category/:subCategory', productController.getSubcategoryProductsFromCategory)
-
+userRouter.post('/productdetail/:productId', productController.getProductDetail)
+userRouter.post('/cart/:productId', authToken.verifyToken, productController.cartDetails)
 
 export default userRouter
