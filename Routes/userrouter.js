@@ -27,6 +27,10 @@ userRouter.get('/subCategory/:subCategory', productController.getSubCategoryWise
 userRouter.get('/homeBanner/:subCategory', productController.getSubCategoryWiseProductsForBanner)
 userRouter.get('/:category/:subCategory', productController.getSubcategoryProductsFromCategory)
 userRouter.post('/productdetail/:productId', productController.getProductDetail)
-userRouter.post('/cart/:productId', authToken.verifyToken, productController.cartDetails)
+userRouter.post('/cart/:productId', authToken.verifyToken, productController.addToCart)
+userRouter.get('/cart', authToken.verifyToken, productController.getCartDetails)
+userRouter.put('/cart/:cartId/:productId', authToken.verifyToken, productController.changeQuantity)
+userRouter.post('/deleteprfrmcart', authToken.verifyToken, productController.removeFromCart)
+userRouter.delete('/delcart', authToken.verifyToken, productController.deleteCart)
 
 export default userRouter
