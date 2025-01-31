@@ -14,7 +14,9 @@ userRouter.delete('/delete-user/:userId', authToken.verifyToken, userController.
 userRouter.post('/edit-profile', authToken.verifyToken, userController.editUserDetails)
 userRouter.get('/getallusers',authToken.verifyToken, userController.getAllUsers)
 userRouter.get('/getuser', authToken.verifyToken, userController.getUserDetails)
-
+userRouter.post('/forgotpassword', userController.forgotPassword)
+userRouter.post('/resetpassword/:userId/:token', userController.resetPassword)
+userRouter.get('/getuserbyid', userController.getuserDetailsById)
 // Product Router
 
 userRouter.post('/create-product', authToken.verifyToken, productController.createProduct )
@@ -32,5 +34,6 @@ userRouter.get('/cart', authToken.verifyToken, productController.getCartDetails)
 userRouter.put('/cart/:cartId/:productId', authToken.verifyToken, productController.changeQuantity)
 userRouter.post('/deleteprfrmcart', authToken.verifyToken, productController.removeFromCart)
 userRouter.delete('/delcart', authToken.verifyToken, productController.deleteCart)
+userRouter.get('/search', productController.searchProduct)
 
 export default userRouter
