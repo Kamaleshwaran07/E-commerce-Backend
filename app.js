@@ -10,7 +10,7 @@ const app = express()
 dotenv.config()
 
 app.use(cors({
-    origin: [process.env.frontendUrl],
+    origin: ['https://ezcartshoppers.netlify.app'],
     credentials:true
 }));
 
