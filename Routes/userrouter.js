@@ -1,6 +1,6 @@
 import express from 'express'
-import userController from '../Controllers/usercontroller.min.js'
-import productController from '../Controllers/productcontroller.min.js'
+import userController from '../Controllers/usercontroller.js'
+import productController from '../Controllers/productcontroller.js'
 import authToken from '../Middleware/auth.js'
 
 const userRouter = express.Router()
