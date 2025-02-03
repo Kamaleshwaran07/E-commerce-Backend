@@ -51,7 +51,7 @@ const userController = {
            
             const userUpdate = await User.findOneAndUpdate({email}, {token: token})
             await userUpdate.save()
-            res.cookie('token', token, tokenOption).status(200).json({message:"Login successful", user, token})
+            res.status(200).json({message:"Login successful", user, token})
         } catch (error) {
             res.status(500).json({error})
         }
