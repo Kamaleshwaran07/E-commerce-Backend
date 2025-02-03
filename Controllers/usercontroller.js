@@ -47,11 +47,8 @@ const userController = {
             if(!comparePassword){
                 return res.status(401).json({message:"Invalid Password. Try again or reset the password"})
             }
-            const token = jwt.sign({id:user._id, email:user.email, role:user.role}  , process.env.JWT_secret, {expiresIn: 60 * 60})
-            const tokenOption = {
-                httpOnly : true,
-                secure: true
-            }
+            const token = jwt.sign({id:user._id, email:user.email, role:user.role}  , process.env.JWT_secret)
+           
             const userUpdate = await User.findOneAndUpdate({email}, {token: token})
             await userUpdate.save()
             res.cookie('token', token, tokenOption).status(200).json({message:"Login successful", user, token})
