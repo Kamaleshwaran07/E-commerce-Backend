@@ -9,7 +9,7 @@ dotenv.config()
 
 const mongoDB = process.env.mongoDBConnectionString;
 
-const port = process.env.Port
+const port = process.env.Port || 5000
 
 
 const connectDB = async () => {
