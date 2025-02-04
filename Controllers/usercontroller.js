@@ -8,14 +8,14 @@ const userController = {
   signup: async (req, res) => {
     try {
       const { name, email, password, profilePicture } = req.body;
-      console.log(name, email, password, { profilePicture });
+      // console.log(name, email, password, { profilePicture });
       const findUser = await User.findOne({ email });
       if (findUser) {
         return res.status(401).json({ message: "Email Id is already in use" });
       }
       const salt = bcryptjs.genSaltSync(10);
       const hashedPassword = await bcryptjs.hashSync(password, salt);
-      console.log(hashedPassword);
+      // console.log(hashedPassword);
 
       if (!hashedPassword) {
         res.status(400).json({ message: "Error in encryption" });
@@ -36,7 +36,7 @@ const userController = {
   login: async (req, res) => {
     try {
       const { email, password } = req.body;
-      console.log(email, password);
+      // console.log(email, password);
 
       const user = await User.findOne({ email }).select("-_id, -__v");
       // console.log(user.password);
@@ -106,7 +106,7 @@ const userController = {
   getAllUsers: async (req, res) => {
     try {
       const userId = req.userId;
-      console.log(userId);
+      // console.log(userId);
       const user = await User.findById(userId);
       if (!user) {
         return res.status(404).json({ message: "User not found" });
@@ -115,7 +115,7 @@ const userController = {
         return res.status(403).json({ message: "Unauthorized" });
       }
       const users = await User.find();
-      console.log(users);
+      // console.log(users);
 
       res.status(200).json({ message: "Users found", users });
     } catch (error) {
@@ -192,7 +192,7 @@ const userController = {
   },
   changePassword: async (req, res) => {
     const { oldPassword, newPassword } = req.body;
-    console.log(oldPassword, newPassword);
+    // console.log(oldPassword, newPassword);
     const userId = req.userId;
     try {
       const user = await User.findById(userId);
@@ -205,7 +205,7 @@ const userController = {
       }
       const salt = bcryptjs.genSaltSync(10);
       const hashedPassword = await bcryptjs.hashSync(newPassword, salt);
-      console.log(hashedPassword);
+      // console.log(hashedPassword);
       const userUpdate = await User.findByIdAndUpdate(userId, {
         password: hashedPassword,
       });
@@ -225,7 +225,7 @@ const userController = {
       const { email } = req.body;
       const user = await User.findOne({ email });
       // const token = await User.findOne({token})
-      console.log(user);
+      // console.log(user);
       if (!user) {
         return res.status(400).json({ message: "No such user exists" });
       } else {
@@ -233,7 +233,7 @@ const userController = {
 
         const token = crypto.randomBytes(10).toString("hex");
         // save the random string in database
-        console.log(token);
+        // console.log(token);
         user.token = token;
         await user.save();
         // Nodemailer
@@ -282,7 +282,7 @@ const userController = {
       // console.log( password);
       // Checking both userId and token to find the user
       const user = await User.findOne({ _id: userId, token });
-      console.log(user);
+      // console.log(user);
       // const token = await User.findOne({token})
       if (!user) {
         return res.status(400).json({ message: "No such user exists" });
@@ -291,7 +291,7 @@ const userController = {
       // If userId and token matched, hash the new  password and update it in the database
       const salt = bcryptjs.genSaltSync(10);
       const hashedPassword = await bcryptjs.hashSync(password, salt);
-      console.log(hashedPassword);
+      // console.log(hashedPassword);
       await User.findByIdAndUpdate(user._id, { passwordHash: hashedPassword });
       await User.findByIdAndUpdate(user._id, { token: null });
 

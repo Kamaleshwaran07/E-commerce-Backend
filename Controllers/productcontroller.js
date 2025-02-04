@@ -16,7 +16,7 @@ const productController = {
       color,
       category,
     } = req.body;
-    console.log(productName);
+    // console.log(productName);
     try {
       const user = await User.findById(userId);
       // console.log(user)
@@ -38,7 +38,7 @@ const productController = {
         productImage,
         userId: userId,
       });
-      console.log(product);
+      // console.log(product);
       await product.save();
       console.log("Product saved", product);
       res
@@ -77,7 +77,7 @@ const productController = {
       category,
     } = req.body;
     const { productId } = req.params;
-    console.log(productId);
+    // console.log(productId);
 
     try {
       const user = await User.findById(userId);
@@ -113,7 +113,7 @@ const productController = {
   deleteProduct: async (req, res) => {
     const userId = req.userId;
     const { productId } = req.params;
-    console.log(productId);
+    // console.log(productId);
     try {
       const user = await User.findById(userId);
 
@@ -124,7 +124,7 @@ const productController = {
         return res.status(401).json({ message: "Unauthorized" });
       }
       const product = await Product.findById(productId);
-      console.log(product);
+      // console.log(product);
 
       if (!product) {
         return res.status(404).json({ message: "Product doesn't exist" });
@@ -242,7 +242,7 @@ const productController = {
   },
   getProductDetail: async (req, res) => {
     const { productId } = req.params;
-    console.log("ProductId", productId);
+    // console.log("ProductId", productId);
     try {
       const productDetail = await Product.findById({ _id: productId });
       // console.log(productDetail);
@@ -259,11 +259,11 @@ const productController = {
   },
   addToCart: async (req, res) => {
     const userId = req.userId;
-    console.log(userId);
+    // console.log(userId);
     const { productId } = req.params;
     const { quantity } = req.body;
-    console.log("Quantity", quantity);
-    console.log("ProductId", productId);
+    // console.log("Quantity", quantity);
+    // console.log("ProductId", productId);
 
     try {
       const user = await User.findById(userId);
@@ -319,10 +319,10 @@ const productController = {
     const userId = req.userId;
     const { quantity } = req.body;
     const { cartId, productId } = req.params;
-    console.log(userId, cartId, quantity);
+    // console.log(userId, cartId, quantity);
     try {
       let userInCart = await Cart.findOne({ userId: userId });
-      console.log(userInCart);
+      // console.log(userInCart);
       const findCart = userInCart.cart.findIndex(
         (item) => item.productId.toString() === productId
       );
@@ -343,7 +343,7 @@ const productController = {
   removeFromCart: async (req, res) => {
     const { cartId } = req.body;
     const userId = req.userId;
-    console.log(cartId, userId);
+    // console.log(cartId, userId);
     try {
       const user = await Cart.findOne({ userId: userId });
       if (!user) {
@@ -370,7 +370,7 @@ const productController = {
       if(!cart){
         return res.status(400).json({message:"No products in the cart"})
       }
-      res.status(200).json({ message: "Successfully placed the Order", cart });
+      res.status(200).json({ message: "Order successfully placed", cart });
     } catch (error) {
       res.status(500).json({ message: "Server error in deleting cart" });
     }
