@@ -5,20 +5,22 @@ dotenv.config();
 const authToken = {
   verifyToken: async (req, res, next) => {
     try {
-      const token = req.cookies.token;
-      console.log("Token from auth", token);
+      // Check both cookie and Authorization header
+      const token =
+        req.cookies.token || req.headers.authorization?.replace("Bearer ", "");
+
       if (!token) {
-        return res.status(400).json({ message: "Token is missing" });
+        return res.status(401).json({ message: "Token is missing" });
       }
-      try {
-        const decoded = jwt.verify(token, process.env.JWT_secret);
-        req.userId = decoded.id;
-        next();
-      } catch (error) {
-        res.status(401).json({ message: "Invalid Token" });
-      }
+
+      const decoded = jwt.verify(token, process.env.JWT_secret);
+      req.userId = decoded.id;
+      next();
     } catch (error) {
-      res.status(500).json("Server Error");
+      if (error instanceof jwt.JsonWebTokenError) {
+        return res.status(401).json({ message: "Invalid Token" });
+      }
+      res.status(500).json({ message: "Server Error" });
     }
   },
 };
